@@ -5,6 +5,7 @@
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
+  background-color: black;
 }
 
 .description {
@@ -52,6 +53,7 @@
   background: rgba(var(--card-rgb), 0);
   border: 1px solid rgba(var(--card-border-rgb), 0);
   transition: background 200ms, border 200ms;
+  cursor: pointer;
 }
 
 .card span {
@@ -78,6 +80,59 @@
   align-items: center;
   position: relative;
   padding: 4rem 0;
+}
+
+.rows{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 60%;
+
+
+}
+
+.button23 {
+  background-color: black;
+  border: 1px solid #FFFFFF;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  padding: 13px 23px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  touch-action: manipulation;
+  transition: box-shadow .2s,-ms-transform .1s,-webkit-transform .1s,transform .1s;
+  user-select: none;
+  -webkit-user-select: none;
+  width: auto;
+}
+
+.button-23:focus-visible {
+  box-shadow: #222222 0 0 0 2px, rgba(255, 255, 255, 0.8) 0 0 0 4px;
+  transition: box-shadow .2s;
+}
+
+.button-23:active {
+  background-color: #F7F7F7;
+  border-color: #000000;
+  transform: scale(.96);
+}
+
+.button-23:disabled {
+  border-color: #DDDDDD;
+  color: #DDDDDD;
+  cursor: not-allowed;
+  opacity: 1;
 }
 
 .center::before {
@@ -122,7 +177,35 @@
   overflow: hidden;
   box-shadow: 0px 2px 8px -1px #0000001a;
 }
+.name{
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0px 2px 8px #0000001a;
+}
+.age{
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0px 2px 8px #0000001a;
+  
+}
+.imagecard{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 
+
+}
+
+.imagepet{
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 20%;
+  box-shadow: 0px 2px 8px -1px #0000001a;
+
+}
 .thirteen::before,
 .thirteen::after {
   content: '';
@@ -202,7 +285,6 @@
     transform: none;
     height: 300px;
   }
-
   .description {
     font-size: 0.8rem;
   }
