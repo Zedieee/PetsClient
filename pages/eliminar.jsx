@@ -1,26 +1,32 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import styles from '../styles/Editar.module.css'
+import axios from 'axios'
 
 export default function Eliminar({ posts }) {
     const router = useRouter()
     const [id, setId] = useState(1)
-    
+    const [data, setData] = useState([])
+
+    const response = async () => {
+      const res = await axios.get('https://nodejs-mysql-restapi-pets-production.up.railway.app/api/pets')
+      setData(res.data)
+      console.log(res.data)
+    } 
+  
+      useEffect(() => {
+        response()
+      }, [])
+  
     const handleId = (e)     => {
         setId(e.target.value)
     }
     
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const res = await fetch(`https://nodejs-mysql-restapi-pets-production.up.railway.app/api/pets/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            id
-        })
-        })
+        const res = await axios.delete(`https://nodejs-mysql-restapi-pets-production.up.railway.app/api/pets/${id}`)
+        
+
     
         router.push('/')
     }
@@ -34,14 +40,17 @@ export default function Eliminar({ posts }) {
             <div className={styles.userbox}>
     
                 <select className={styles.select} defaultValue={id} onChange={handleId} name="id" id="id">
-                {posts.map((post) => (
-                    <option className={styles.option} key={post.id} value={post.id}>
-                    {post.name}
+                {Object.keys(data).map((key) => {
+                    return (
+                    <option className={styles.option} key={key} value={data[key].id}>
+                        {data[key].name}
                     </option>
-                ))}
+                    )
+                })
+                }
                 </select>
             </div>
-            <input onClick={handleSubmit} type="submit" name="" value="Eliminar" />
+            <input className={styles.button23} onClick={handleSubmit} type="submit" name="" value="Eliminar" />
             </form>
         </div>
         </main>

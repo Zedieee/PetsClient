@@ -2,14 +2,28 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import axios from 'axios'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({ posts }) {
+export default function Home() {
   const router = useRouter()
+  const [data, setData] = useState([])
+
+  const response = async () => {
+    const res = await axios.get('https://nodejs-mysql-restapi-pets-production.up.railway.app/api/pets')
+    setData(res.data)
+    console.log(res.data)
+  } 
+
+    useEffect(() => {
+      response()
+    }, [])
+
 
   return (
     <>
@@ -47,33 +61,35 @@ export default function Home({ posts }) {
 
         <div className={styles.grid} >
 
-          {posts.map((post) => (
-            <div className={styles.card} onClick={(e) => {
+          {data && Object.keys(data).map((key) => {
+            
+            return (
+              <div className={styles.card} onClick={(e) => {
               
                 router.push({
                   pathname: '/pet',
-                  query: { name: post.name, age: post.age, image_pet: post.image_pet, description: post.description },
+                  query: { name: data[key].name, age: data[key].age, image_pet: data[key].image_pet, description: data[key].description },
                 })
               
-            }} key={post.id}  >
+            }} key={key.id}  >
 
               <div className={styles.imagecard}>
                 <div>
-                  <h2 className={styles.name} >{post.name}</h2>
+                  <h2 className={styles.name} >{data[key].name}</h2>
 
-                  <p className={styles.age}>{post.age} Años</p>
+                  <p className={styles.age}>{data[key].age} Años</p>
 
                   
 
                 </div>
 
 
-                <img src={post.image_pet} alt="image pet" className={styles.imagepet} />
+                <img src={data[key].image_pet} alt="image pet" className={styles.imagepet} />
 
               </div>
             </div>
-
-          ))
+            )
+          })
           }
         </div>
       </main>
@@ -81,17 +97,3 @@ export default function Home({ posts }) {
   )
 }
 
-export async function getStaticProps() {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  const res = await fetch('https://nodejs-mysql-restapi-pets-production.up.railway.app/api/pets')
-  const posts = await res.json()
-
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
-  return {
-    props: {
-      posts,
-    },
-  }
-}

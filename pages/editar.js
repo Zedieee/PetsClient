@@ -1,13 +1,25 @@
 import styles from '../styles/Editar.module.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
-export default function Editar({ posts }) {
+export default function Editar() {
   const router = useRouter()
   const [name, setName] = useState(null)
   const [age, setAge] = useState(null)
   const [description, setDescription] = useState(null)
   const [id, setId] = useState(1)
+  const [data, setData] = useState([])
+
+  const response = async () => {
+    const res = await axios.get('https://nodejs-mysql-restapi-pets-production.up.railway.app/api/pets')
+    setData(res.data)
+    console.log(res.data)
+  } 
+
+    useEffect(() => {
+      response()
+    }, [])
 
   const handleId = (e) => {
     setId(e.target.value)
@@ -29,18 +41,15 @@ export default function Editar({ posts }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const res = await fetch(`https://nodejs-mysql-restapi-pets-production.up.railway.app/api/pets/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        id,
-        name,
-        age,
-        description
-      })
+    
+    const res = await axios.patch(`https://nodejs-mysql-restapi-pets-production.up.railway.app/api/pets/${id}`, {
+      id,
+      name,
+      age,
+      description
     })
+    
+
 
     router.push('/')
   }
@@ -54,11 +63,14 @@ export default function Editar({ posts }) {
           <div className={styles.userbox}>
 
             <select className={styles.select} defaultValue={id} onChange={handleId} name="id" id="id">
-              {posts.map((post) => (
-                <option className={styles.option} key={post.id} value={post.id}>
-                  {post.name}
+              {data && Object.keys(data).map((key) => {
+                return (
+                  <option className={styles.option} key={data[key].id} value={data[key].id}>
+                  {data[key].name}
                 </option>
-              ))}
+                )
+              })
+              }
             </select>
           </div>
           <div className={styles.userbox}>

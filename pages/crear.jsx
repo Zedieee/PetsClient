@@ -1,7 +1,7 @@
 import styles from '../styles/Editar.module.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-
+import axios from 'axios'
 export default function Crear() {
     const router = useRouter()
     const [name, setName] = useState(null)
@@ -27,18 +27,14 @@ export default function Crear() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const res = await fetch(`https://nodejs-mysql-restapi-pets-production.up.railway.app/api/pets`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name,
-                age,
-                image_pet,
-                description
-            })
+        
+        const res = await axios.post('https://nodejs-mysql-restapi-pets-production.up.railway.app/api/pets', {
+            name,
+            age,
+           image_pet,
+            description
         })
+        console.log(res.data)
         
         router.push('/')
 
