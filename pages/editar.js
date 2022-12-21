@@ -2,7 +2,7 @@ import styles from '../styles/Editar.module.css'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
-import GoBack from '../components/GoBack'
+import GoBack from '../components/goback'
 export default function Editar() {
   const router = useRouter()
   const [name, setName] = useState(null)
