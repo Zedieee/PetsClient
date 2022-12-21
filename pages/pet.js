@@ -4,14 +4,11 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import styles from "../styles/Pet.module.css";
 import { useState } from "react";
+import GoBack from "../components/goback";
 export default function Pet() {
     const router = useRouter()
     const { name, age, image_pet,description } = router.query
-    const handelClick = (e) => {
-        router.push({
-            pathname: '/',
-        })
-    }
+
     return (
         <div>
             <Head>
@@ -22,9 +19,7 @@ export default function Pet() {
             </Head>
             <main className={styles.main}>
                 <div className={styles.description}>
-                    <div onClick={handelClick}>
-                    <h1>&larr; {name}</h1>
-                    </div>
+                    <GoBack name={name} />
                   
                     <p>{name} is {age} years old</p>
                     

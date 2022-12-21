@@ -2,6 +2,7 @@ import styles from '../styles/Editar.module.css'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import GoBack from '../components/goback'
 export default function Crear() {
     const router = useRouter()
     const [name, setName] = useState(null)
@@ -35,14 +36,15 @@ export default function Crear() {
             description
         })
         console.log(res.data)
-        
         router.push('/')
 
-    
     }
 
     return (
         <main className={styles.main}>
+            <div  className={styles.description}>
+            <GoBack />
+            </div >
             <div className={styles.loginbox}>
                 <h2>Crear mascota</h2>
                 <form>

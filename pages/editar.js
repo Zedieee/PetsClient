@@ -2,7 +2,7 @@ import styles from '../styles/Editar.module.css'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
-
+import GoBack from '../components/GoBack'
 export default function Editar() {
   const router = useRouter()
   const [name, setName] = useState(null)
@@ -56,10 +56,14 @@ export default function Editar() {
 
   return (
     <main className={styles.main}>
+      <div  className={styles.description}>
+            <GoBack />
+      </div >
       <div className={styles.loginbox}>
         <h2>Actualizar mascota</h2>
         <form>
           <label>Nombre</label>
+
           <div className={styles.userbox}>
 
             <select className={styles.select} defaultValue={id} onChange={handleId} name="id" id="id">
@@ -93,17 +97,3 @@ export default function Editar() {
   )
 }
 
-export async function getStaticProps() {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  const res = await fetch('https://nodejs-mysql-restapi-pets-production.up.railway.app/api/pets')
-  const posts = await res.json()
-
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
-  return {
-    props: {
-      posts,
-    },
-  }
-}

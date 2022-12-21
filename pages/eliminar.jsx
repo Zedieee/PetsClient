@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import styles from '../styles/Editar.module.css'
 import axios from 'axios'
+import GoBack from '../components/goback'
 
-export default function Eliminar({ posts }) {
+export default function Eliminar() {
     const router = useRouter()
     const [id, setId] = useState(1)
     const [data, setData] = useState([])
@@ -33,6 +34,9 @@ export default function Eliminar({ posts }) {
     
     return (
         <main className={styles.main}>
+                            <div  className={styles.description}>
+            <GoBack />
+            </div >
         <div className={styles.loginbox}>
             <h2>Eliminar mascota</h2>
             <form>
@@ -56,18 +60,3 @@ export default function Eliminar({ posts }) {
         </main>
     )
     }
-
-    export async function getStaticProps() {
-        // Call an external API endpoint to get posts.
-        // You can use any data fetching library
-        const res = await fetch('https://nodejs-mysql-restapi-pets-production.up.railway.app/api/pets')
-        const posts = await res.json()
-      
-        // By returning { props: { posts } }, the Blog component
-        // will receive `posts` as a prop at build time
-        return {
-          props: {
-            posts,
-          },
-        }
-      }
