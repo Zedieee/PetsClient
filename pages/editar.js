@@ -74,7 +74,7 @@ export default function Editar() {
                 </option>
                 )
               })
-              }
+              } 
             </select>
           </div>
           <div className={styles.userbox}>
