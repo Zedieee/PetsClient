@@ -67,6 +67,34 @@
   background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
   margin-bottom: 20px;
 }
+.custominputfile {
+  background-color: #222222;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 auto 20px;
+  min-height: 15px;
+  overflow: hidden;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  width: 100%;
+
+}
+
+.custominputfile .inputfile {
+ border: 10000px solid transparent;
+ cursor: pointer;
+ font-size: 10000px;
+ margin: 0;
+ opacity: 0;
+ outline: 0 none;
+ padding: 0;
+ position: absolute;
+ right: -1000px;
+ top: -1000px;
+}
 .option{
   color: black;
   }

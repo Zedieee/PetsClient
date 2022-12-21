@@ -17,7 +17,6 @@ export default function Home() {
   const response = async () => {
     const res = await axios.get('https://nodejs-mysql-restapi-pets-production.up.railway.app/api/pets')
     setData(res.data)
-    console.log(res.data)
   } 
 
     useEffect(() => {
@@ -71,7 +70,7 @@ export default function Home() {
                   query: { name: data[key].name, age: data[key].age, image_pet: data[key].image_pet, description: data[key].description },
                 })
               
-            }} key={key.id}  >
+            }} key={data[key].id}  >
 
               <div className={styles.imagecard}>
                 <div>
