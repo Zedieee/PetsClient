@@ -9,7 +9,8 @@ export default function Crear() {
   const [age, setAge] = useState(null);
   const [description, setDescription] = useState(null);
   const [image_pet, setImage_pet] = useState("");
-  const [imageSrc, setImageSrc] = useState(null);
+  const [setted, setSetted] = useState(false);
+
 
   const handleAge = (e) => {
     setAge(e.target.value);
@@ -26,6 +27,7 @@ export default function Crear() {
     formData.append("upload_preset", "wx2e9n6q");
     axios.post("https://api.cloudinary.com/v1_1/dpu6swtkx/image/upload", formData).then((res) => {
         setImage_pet(res.data.secure_url);
+        setSetted(true);
   });
    
         
@@ -93,8 +95,9 @@ export default function Crear() {
             onClick={handleSubmit}
             className={styles.button23}
             role="button"
+            disabled={!setted}
           >
-            Guardar
+            Guardar {setted ? "✔" : ""}
           </button>
         </form>
       </div>
